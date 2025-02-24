@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchUser } from "./redux/userSlice"; // Import fetchUser action
 import shuffle from "lodash.shuffle";
+import { useNavigate } from "react-router-dom";
 
 const easySymbols = ["🦄", "🚀", "🌈", "🔥", "⚡", "🎸", "💎", "🎯"];
 const mediumSymbols = [...easySymbols, "🎩", "🎃", "🍕", "🎁"];
@@ -19,7 +20,7 @@ const Game = () => {
   // Get user data from Redux
   const { name, scores } = useSelector((state) => state.user);
 
-
+  const navigate = useNavigate();
 
   
 
@@ -138,6 +139,11 @@ const Game = () => {
   }
 };
 
+
+const handleNavigateStartGame=()=>{
+  navigate('/');
+}
+
   
   
 
@@ -192,7 +198,7 @@ const Game = () => {
               <p className="text-yellow-300">New High Score: {score} 🔥</p>
             )}
             <button
-              onClick={() => window.location.reload()}
+             onClick={()=>handleNavigateStartGame()}
               className="mt-4 px-6 py-2 bg-blue-600 rounded-lg hover:bg-blue-700 transition"
             >
               Play Again
@@ -207,7 +213,7 @@ const Game = () => {
           <div className="bg-gray-800 p-6 rounded-lg shadow-xl text-center">
             <h2 className="text-2xl font-bold text-red-400">⏳ Time's Up! You Lost! 😢</h2>
             <button
-              onClick={() => window.location.reload()}
+             onClick={()=>handleNavigateStartGame()}
               className="mt-4 px-6 py-2 bg-red-600 rounded-lg hover:bg-red-700 transition"
             >
               Try Again
